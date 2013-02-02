@@ -7,11 +7,10 @@ DROP TABLE VillageList
 
 CREATE TABLE VillageList(
 villageID int IDENTITY,
-catsDefined int,
-RefrigeranteFavID int,
-BandaFavID int
 PRIMARY KEY (villageID)
 ) 
+
+
 
 IF (OBJECT_ID('dbo.Persons') IS NOT NULL)
 DROP TABLE persons
@@ -21,22 +20,12 @@ PersonID int IDENTITY,
 villageID int,
 Nome varchar(255) NOT NULL,
 Idade int NOT NULL,
+DefinedCats int,
 Sexo varchar(1) NOT NULL CHECK (sexo='m' OR sexo='f')
 PRIMARY KEY(PersonID)
 FOREIGN KEY (villageID) REFERENCES VillageList(villageID)
 )
 
-
-
-
-IF (OBJECT_ID('dbo.PersonalChoices') IS NULL)
-CREATE TABLE PersonalChoices(
-PersonID int NOT NULL,
-CatsDefined int NOT NULL,
-RefrigeranteFavID int,
-BandaFavID int,
-FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
-) 
 
 IF (OBJECT_ID('dbo.Categoria') IS NULL)
 CREATE TABLE Categoria(
@@ -50,27 +39,41 @@ CREATE TABLE SubCategoria(
 CatID int NOT NULL,
 SubCatID int IDENTITY,
 Nome varchar(255) NOT NULL,
-PRIMARY KEY (SubCatID),
+PRIMARY KEY (SubCatID, CatID),
 FOREIGN KEY (CatID) REFERENCES Categoria(catID)
 ) 
 
+CREATE TABLE Person_Product(
+	PersonID int NOT NULL,
+	ProductID int NOT NULL,
+	FOREIGN KEY (PersonID) REFERENCES Persons(PersonID),
+	FOREIGN KEY (ProductID) REFERENCES Produtos(ProductID)
+)
+
+CREATE TABLE Village_Product(
+	villageID int NOT NULL,
+	ProductID int NOT NULL,
+	FOREIGN KEY (villageID) REFERENCES VillageList(villageID),
+	FOREIGN KEY (ProductID) REFERENCES Produtos(ProductID)
+)
+
+CREATE TABLE Person_Category(
+	PersonID int NOT NULL,
+	CatID int NOT NULL,
+	FOREIGN KEY (PersonID) REFERENCES Persons(PersonID),
+	FOREIGN KEY (CatID) REFERENCES Categoria(CatID)
+)
+
+DROP TABLE Produtos
 IF(OBJECT_ID('dbo.Produtos') IS NULL)
 CREATE TABLE Produtos(
 SubCat int NOT NULL,
 ProductID int NOT NULL,
 Nome varchar(255) NOT NULL,
+FeedURI varchar(255) NOT NULL,
+ImageURL VARCHAR(2083) NOT NULL, 
+PRIMARY KEY (ProductID),
 FOREIGN KEY (SubCat) REFERENCES SubCategoria(SubCatID)
-) 
-
-IF(OBJECT_ID('dbo.FavCat') IS NULL)
-CREATE TABLE FavCat(
-PersonID int Unique NOT NULL,
-FirstCatID int NOT NULL,
-SecondCatID int NOT NULL,
-ThirdCatID int NOT NULL,
-FourthCatID int NOT NULL,
-FifthCatID int NOT NULL,
-FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
 ) 
 
 GO
