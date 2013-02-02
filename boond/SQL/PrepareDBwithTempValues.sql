@@ -23,5 +23,6 @@ EXEC addFavCats @andreID,@catMusica,@catCinema,@catJogos,@catinternet,@catCarros
 
 DELETE FROM SUBCATEGORIA
 
-DECLARE
+DECLARE @FPS int, @RPG int, @MMO int, @Kizomba int, @Kuduro int, @Thriller int, @Drama int
 
+INSERT INTO SubCategoria VALUES(@catMusica,null,'Kizomba')

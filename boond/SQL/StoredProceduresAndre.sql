@@ -19,7 +19,7 @@ Declare @catToBePlayed int
 SELECT  TOP 1 @catToBePlayed= CatID FROM Person_Category
 ORDER BY NEWID()
 PRINT(@catToBePlayed)
-
+EXEC dbo.productosFromsameCat @catToBePlayed
 
 
 EXEC addFavCats 2,1,2,3,4,5
