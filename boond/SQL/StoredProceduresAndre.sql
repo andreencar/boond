@@ -30,3 +30,25 @@ CREATE CLUSTERED INDEX toTestone
 ON Person_Category (PersonID)
 
 INSERT INTO Person_Category VALUES(2, 1)
+
+
+
+
+CREATE PROC dbo.AddPerson
+@Nome varchar(255), @Idade int, @DefinedCats int, @Sexo varchar(1)
+AS
+ INSERT INTO Persons VALUES (@Nome, @Idade, @DefinedCats, @Sexo)
+
+
+
+
+DROP PROC dbo.productsFromSameCat
+
+CREATE PROC dbo.productsFromSameCat 
+@cat INT
+AS
+BEGIN
+	DECLARE @subCat INT
+	SET @subCat = (select top 1 SubCatID from SubCategoria where CatID = @cat order by newid())
+	INSERT INTO #ProductsSP SELECT TOP 2 ProductID FROM Produtos WHERE SubCat = @subCat
+END
