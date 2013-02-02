@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="container-fluid">
+            <header>
+                <!-- NavBar -->
+                <div class="row-fluid ">
+                    <div class="span4">
+                    </div>
+                    <div class="span4">
+                    <h1> A new way to connect... Boond! </h1>
+                        </div>
+                    <div class="span4"></div>
+                </div>
+            </header>
+ 
+                <div class="row-fluid">
+                    <div class="span10" id="body">
+                        @RenderBody()
+                    </div>
+                    <div class="span2 fixed-right" id="feed">
+                        @Html.Partial("NewsFeed")
+                    </div>
+                </div>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Boond</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

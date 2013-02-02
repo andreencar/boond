@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    }
+    <div class="row-fluid" id="current-battle">
+        <div class="span6 well" id="left-ad">
+            <div class="span4 well" id="left-ad-buttons">
+                <ul>
+                    <li>ButtonLike</li>
+                    <li>ButtonWhatIs</li>
+                    <li>ButtonHate</li>
+                </ul>
+            </div>
+            <div class="span8 well" id="left-ad-image">
+                <img src=@Url.Content("~/bootstrap/img/glyphicons-halflings.png") class="image-polaroid" />
+            </div>
+        </div>
+        <div class="span6 well" id="right-ad">
+
+            <div class="span8 well" id="right-ad-image">
+                <img src=@Url.Content("~/bootstrap/img/glyphicons-halflings.png") class="image-polaroid" />
+            </div>
+
+            <div class="span4 well" id="right-ad-buttons">
+                <ul>
+                    <li>ButtonLike</li>
+                    <li>ButtonWhatIs</li>
+                    <li>ButtonHate</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid" id="next-battles">
+        <!-- To Be Filled Through an AJAX operation, as soon as the page is Loaded -->
+    </div>
+
