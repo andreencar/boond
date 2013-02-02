@@ -31,18 +31,17 @@ ON Person_Category (PersonID)
 
 INSERT INTO Person_Category VALUES(2, 1)
 
-
-
-
 CREATE PROC dbo.AddPerson
 @Nome varchar(255), @Idade int, @DefinedCats int, @Sexo varchar(1)
 AS
  INSERT INTO Persons VALUES (@Nome, @Idade, @DefinedCats, @Sexo)
 
-
-
-
 DROP PROC dbo.productsFromSameCat
+
+CREATE TABLE #ProductsSP(
+	ProductID INT NOT NULL,
+	FOREIGN KEY (ProductID) REFERENCES Produtos(ProductID)
+)
 
 CREATE PROC dbo.productsFromSameCat 
 @cat INT
