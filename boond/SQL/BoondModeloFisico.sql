@@ -30,7 +30,7 @@ FOREIGN KEY (villageID) REFERENCES VillageList(villageID)
 IF (OBJECT_ID('dbo.Categoria') IS NULL)
 CREATE TABLE Categoria(
 CatID int IDENTITY,
-Nome varchar(255) NOT NULL,
+Nome varchar(255) NOT NULL UNIQUE,
 PRIMARY KEY (CatID)
 ) 
 
@@ -38,7 +38,7 @@ IF (OBJECT_ID('dbo.SubCategoria') IS NULL)
 CREATE TABLE SubCategoria(
 CatID int NOT NULL,
 SubCatID int IDENTITY,
-Nome varchar(255) NOT NULL,
+Nome varchar(255) NOT NULL UNIQUE,
 PRIMARY KEY (SubCatID, CatID),
 FOREIGN KEY (CatID) REFERENCES Categoria(catID)
 ) 
