@@ -72,6 +72,10 @@ CREATE TABLE Person_Category(
 )
 
 
+CREATE clustered INDEX pID
+ON Person_Category(PersonID)
+
+DROP TABLE Produtos
 IF(OBJECT_ID('dbo.Produtos') IS NULL)
 CREATE TABLE Produtos(
 Cat int NOT NULL,
@@ -103,8 +107,8 @@ CLOSE cur
 DEALLOCATE cur
 
 
-IF OBJECT_ID ( 'HumanResources.uspGetEmployees', 'P' ) IS NOT NULL 
-    DROP PROCEDURE HumanResources.uspGetEmployees;
+IF OBJECT_ID ( 'jungle_to_village' ) IS NOT NULL 
+    DROP PROCEDURE 'jungle_to_village';
 GO
 CREATE PROCEDURE jungle_to_village
 DECLARE CURSOR usersWithoutVillage FOR SELECT PersonID FROM Persons WHERE villageID = 0
