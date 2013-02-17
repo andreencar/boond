@@ -1,19 +1,27 @@
 USE wdme_db
 
+DROP TABLE Person_Product
 
+DROP TABLE Village_Product
 
-IF (OBJECT_ID('dbo.VillageList') IS NOT NULL)
+DROP TABLE Person_Category
+
+DROP TABLE SubCategoria
+
+DROP TABLE Categoria
+
+DROP TABLE Persons
+
 DROP TABLE VillageList
+
+DROP TABLE Produtos
+
+
 
 CREATE TABLE VillageList(
 villageID int IDENTITY,
 PRIMARY KEY (villageID)
 ) 
-
-
-
-IF (OBJECT_ID('dbo.Persons') IS NOT NULL)
-DROP TABLE persons
 
 CREATE TABLE Persons(
 PersonID int IDENTITY,
@@ -63,16 +71,17 @@ CREATE TABLE Person_Category(
 	FOREIGN KEY (CatID) REFERENCES Categoria(CatID)
 )
 
-DROP TABLE Produtos
+
 IF(OBJECT_ID('dbo.Produtos') IS NULL)
 CREATE TABLE Produtos(
+Cat int NOT NULL,
 SubCat int NOT NULL,
 ProductID int NOT NULL,
 Nome varchar(255) NOT NULL,
 FeedURI varchar(255) NOT NULL,
 ImageURL VARCHAR(2083) NOT NULL, 
 PRIMARY KEY (ProductID),
-FOREIGN KEY (SubCat) REFERENCES SubCategoria(SubCatID)
+FOREIGN KEY (SubCat, Cat) REFERENCES SubCategoria(SubCatID, CatID)
 ) 
 
 GO
